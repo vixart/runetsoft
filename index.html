@@ -1,0 +1,45 @@
+﻿<html ng-app="userModule">
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+		<script src="controller.js"></script>
+		<style type="text/css">
+			TABLE {
+				border-collapse: collapse; /* Убираем двойные линии между ячейками */
+			}
+			TD, TH {
+				padding: 3px; /* Поля вокруг содержимого таблицы */
+				border: 1px solid black; /* Параметры рамки */
+			}
+		</style>
+	</head>
+	<body ng-controller="userCtrl">
+		<div>
+			<select multiple="multiple" ng-model="queryCity">
+				<option ng-repeat="city in cities">{{city}}</option>
+			</select>
+
+			<select multiple="multiple" ng-model="queryQualification">
+				<option ng-repeat="qualification in qualifications" value={{qualification}}>{{qualification}}</option>
+			</select>
+		</div>
+		<br>
+		<div>
+			<table style="border:1px solid black">
+				<thead>
+					<tr>
+						<td>ФИО</td>
+						<td>Образование</td>
+						<td>Города</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="user in users | filter:filterQualifications | filter:filterCities">
+						<td>{{user.name}}</td>
+						<td>{{user.qualification}}</td>
+						<td>{{user.cities.join(', ')}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</body>
+</html>1
